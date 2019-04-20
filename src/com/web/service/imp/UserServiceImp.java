@@ -1,19 +1,25 @@
-package com.web.service;
+package com.web.service.imp;
 
 import com.web.model.Users;
+import com.web.service.UserService;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
 
+import javax.annotation.Resource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-public class userService {
+@Repository("UserService")
+public class UserServiceImp implements UserService {
+    @Resource
     private JdbcTemplate jdbcTemplate;
     public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
     public List<Users> queryAll() {
+        System.out.println("fg"+ jdbcTemplate);
         String sql = "select id,name,pwd from users";
         //将查询结果映射到Users类中，添加到list中，并返回
         return jdbcTemplate.query(sql, new UsersMapper());
@@ -33,3 +39,4 @@ public class userService {
 
     }
 }
+
