@@ -15,25 +15,21 @@
     <tx:annotation-driven transaction-manager="transactionManager" />
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="com.mysql.jdbc.Driver" />
-        <property name="url" value="jdbc:mysql://localhost:3306/McGrady"></property>
-        <property name="username" value="root"></property>
-        <property name="password" value="12345678"></property>
+        <property name="url" value="jdbc:mysql://localhost:3306/McGrady?useUnicode=true&amp;characterEncoding=UTF-8" />
+        <property name="username" value="root" />
+        <property name="password" value="12345678" />
     </bean>
-    <bean id="sessionFactory"
-          class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
-        <property name="dataSource">
-            <ref bean="dataSource" />
-        </property>
-        <property name="hibernateProperties">
-            <props>
-                <prop key="hibernate.dialect">
-                    org.hibernate.dialect.MySQLDialect
-                </prop>
-            </props>
-        </property>
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
         <property name="mappingResources">
             <list>
                 <value>com/web/model/Users.hbm.xml</value>
+                <value>com/web/model/Menus.hbm.xml</value>
+            </list>
+        </property>
+        <property name="annotatedClasses">
+            <list>
+                <value>com.web.model.Menus</value>
+                <value>com.web.model.Users</value>
             </list>
         </property>
     </bean>

@@ -6,19 +6,14 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.sql.Timestamp;
 import java.util.Objects;
-import java.util.Random;
 
 @Entity
 public class Users {
-
     private int id;
-    private String pwd;
     private String name;
+    private String pwd;
     private Timestamp updatedAt;
     private Timestamp createdAt;
-
-    public Users(){
-    }
 
     @Id
     @Column(name = "id", nullable = false)
@@ -76,8 +71,8 @@ public class Users {
         if (o == null || getClass() != o.getClass()) return false;
         Users users = (Users) o;
         return id == users.id &&
-                Objects.equals(pwd, users.pwd) &&
                 Objects.equals(name, users.name) &&
+                Objects.equals(pwd, users.pwd) &&
                 Objects.equals(updatedAt, users.updatedAt) &&
                 Objects.equals(createdAt, users.createdAt);
     }

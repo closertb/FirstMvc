@@ -16,7 +16,7 @@
         <init-param>
             <param-name>contextConfigLocation</param-name>
             <!-- 对应上一步创建全局配置文件的文件名以及目录 -->
-            <param-value>classpath:springmvc.xml</param-value>
+            <param-value>classpath:springmvc.xml,classpath:hibernate.cfg.xml</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
@@ -24,6 +24,7 @@
         <servlet-name>dispatcher</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
+    <!-- hibernate4  OpenSession -->
     <filter>
         <filter-name>SpringOpenSessionInViewFilter</filter-name>
         <filter-class>org.springframework.orm.hibernate4.support.OpenSessionInViewFilter</filter-class>
@@ -32,12 +33,30 @@
         <filter-name>SpringOpenSessionInViewFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+    <!-- Cors过滤 -->
     <filter>
         <filter-name>cors</filter-name>
         <filter-class>com.web.common.CorsFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>cors</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <!-- 乱码过滤 -->
+    <filter>
+        <filter-name>characterEncodingFilter</filter-name>
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+        <init-param>
+            <param-name>forceEncoding</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>characterEncodingFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 </web-app>

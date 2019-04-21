@@ -6,6 +6,8 @@
     <session-factory>
         <property name="connection.url">jdbc:mysql://localhost:3306/McGrady</property>
         <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="connection.characterEncoding">UTF-8</property>
+        <property name="connection.useEncoding">true</property>
         <!-- 2. 其他相关配置 -->
         <!-- 2.1 显示hibernate在运行时候执行的sql语句 -->
         <property name="hibernate.show_sql">true</property>
@@ -15,6 +17,8 @@
         <property name="hibernate.hbm2ddl.auto">create</property>
         <mapping class="com.web.model.Users"/>
         <mapping resource="com/web/model/Users.hbm.xml"/>
+        <mapping resource="com/web/model/Menus.hbm.xml"/>
+        <mapping class="com.web.model.Menus"/>
 
         <!-- DB schema will be updated if needed -->
         <!-- <property name="hbm2ddl.auto">update</property> -->
