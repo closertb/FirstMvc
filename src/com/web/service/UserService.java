@@ -5,4 +5,5 @@ import java.util.List;
 
 public interface UserService {
     public List<Users> queryAll();
+    public Users queryUserById(int id);
 }

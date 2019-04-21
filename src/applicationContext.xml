@@ -3,39 +3,51 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:tx="http://www.springframework.org/schema/tx"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context-4.1.xsd
         http://www.springframework.org/schema/mvc
-        http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd"
-       default-autowire="byName" default-lazy-init="true"  >
-    <!-- 启动Spring MVC的注解功能，完成请求和注解POJO的映射 -->
+        http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd"
+       default-autowire="byName" default-lazy-init="true">
+    <tx:annotation-driven transaction-manager="transactionManager" />
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <!--加载驱动类-->
         <property name="driverClassName" value="com.mysql.jdbc.Driver" />
-        <!--数据库访问地址-->
-        <property name="url" value="jdbc:mysql://localhost:3306/McGrady" />
-        <!--数据库访问用户名-->
-        <property name="username" value="root" />
-        <!--数据库访问密码-->
-        <property name="password" value="12345678" />
+        <property name="url" value="jdbc:mysql://localhost:3306/McGrady"></property>
+        <property name="username" value="root"></property>
+        <property name="password" value="12345678"></property>
     </bean>
+    <bean id="sessionFactory"
+          class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+        <property name="dataSource">
+            <ref bean="dataSource" />
+        </property>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">
+                    org.hibernate.dialect.MySQLDialect
+                </prop>
+            </props>
+        </property>
+        <property name="mappingResources">
+            <list>
+                <value>com/web/model/Users.hbm.xml</value>
+            </list>
+        </property>
+    </bean>
+
+    <!--  定义事务通知    -->
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="*" propagation="REQUIRED" />
+        </tx:attributes>
+    </tx:advice>
     <!-- spring 提供的数据库事务管理 -->
-    <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-        <property name="dataSource" ref="dataSource" />
+    <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager" />
+    <bean id="transactionManager"
+          class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory" />
     </bean>
-    <!-- 配置javaBean实体类 -->
-<!--    <bean id="userBean" class="com.web.model.Users" />
-    <bean id="todoBean" class="com.web.model.Todo" />-->
-    <!--属性自动配置 -->
-    <!--spring提供的数据库访问操作类 -->
-    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate"/>
-<!--    &lt;!&ndash; dao层类 &ndash;&gt;
-    <bean id="TodoService" class="com.web.service.imp.TodoServiceImp" />
-    <bean id="UserService" class="com.web.service.imp.UserServiceImp"/>
-    <bean id="HelloControl" class="com.web.handler.HelloControl">
-        <property name="todoService" ref="TodoService" />
-        <property name="userService" ref="UserService" />
-    </bean>-->
 </beans>

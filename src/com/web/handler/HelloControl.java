@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.web.model.Todo;
 import com.web.service.TodoService;
 import com.web.service.UserService;
+import com.web.service.imp.UserServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -50,6 +51,14 @@ public class HelloControl extends BaseController{
         //map.put相当于request.setAttribute方法  –
         return retContent(200, map);
     }
+
+    @RequestMapping(value="/getUser")
+    @ResponseBody
+    public Users getUser(){
+        //map.put相当于request.setAttribute方法  –
+        return userService.queryUserById(5);
+    }
+
     @RequestMapping(value="/todo")
     @ResponseBody
     public String getTodo(){
