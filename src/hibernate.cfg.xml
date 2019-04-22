@@ -4,10 +4,6 @@
         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
     <session-factory>
-        <property name="connection.url">jdbc:mysql://localhost:3306/McGrady</property>
-        <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
-        <property name="connection.characterEncoding">UTF-8</property>
-        <property name="connection.useEncoding">true</property>
         <!-- 2. 其他相关配置 -->
         <!-- 2.1 显示hibernate在运行时候执行的sql语句 -->
         <property name="hibernate.show_sql">true</property>

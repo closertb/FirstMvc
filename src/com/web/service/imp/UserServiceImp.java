@@ -42,23 +42,17 @@ public class UserServiceImp implements UserService {
     public Users queryUserById(int id) {
         String sql = "select id,name,pwd from users";
         Users res = (Users) this.getCurrentSession().get(Users.class, id);
-        // System.out.println("fg"+ this.getCurrentSession());
+        System.out.println("fg"+ ":中文");
         //将查询结果映射到Users类中，添加到list中，并返回
         return res;
     }
 
-    class UsersMapper implements RowMapper<Users> {
-
-        @Override
-        public Users mapRow(ResultSet rs, int rowNum) throws SQLException {
-            Users user = new Users();
-            user.setId(rs.getInt(1));
-            user.setName(rs.getString(2));
-            user.setPwd(rs.getString(3));
-
-            return user;
-        }
-
+    public Boolean saveUser(Users user) {
+        this.getCurrentSession().save(user);
+        // Users res = (Users) this.getCurrentSession().get(Users.class, id);
+        // System.out.println("fg"+ this.getCurrentSession());
+        //将查询结果映射到Users类中，添加到list中，并返回
+        return true;
     }
 }
 
