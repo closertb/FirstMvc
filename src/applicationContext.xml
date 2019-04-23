@@ -15,11 +15,19 @@
     <tx:annotation-driven transaction-manager="transactionManager" />
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="com.mysql.jdbc.Driver" />
-        <property name="url" value="jdbc:mysql://localhost:3306/McGrady?useUnicode=true&amp;characterEncoding=UTF-8" />
+        <property name="url" value="jdbc:mysql://localhost:3306/McGrady" />
         <property name="username" value="root" />
         <property name="password" value="12345678" />
     </bean>
     <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.hbm2ddl.auto">update</prop> <!--hibernate根据实体自动生成数据库表-->
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>   <!--指定数据库方言-->
+                <prop key="hibernate.show_sql">true</prop>     <!--在控制台显示执行的数据库操作语句-->
+                <prop key="hibernate.format_sql">true</prop>     <!--在控制台显示执行的数据哭操作语句（格式）-->
+            </props>
+        </property>
         <property name="mappingResources">
             <list>
                 <value>com/web/model/Users.hbm.xml</value>
