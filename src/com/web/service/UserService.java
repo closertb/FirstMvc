@@ -8,4 +8,5 @@ public interface UserService {
     public List<Users> queryAll();
     public Users queryUserById(int id);
     public Boolean saveUser(Users user);
+    public Boolean updateUser(Users user);
 }

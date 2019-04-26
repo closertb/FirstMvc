@@ -38,4 +38,16 @@ public class UsersControl extends BaseController {
         Boolean res = userService.saveUser(user);
         return retContent(200, map);
     }
+    @RequestMapping("/update")
+    @ResponseBody
+    public String updateUser(Users user) {
+//        Users user = new Users();
+        Map<String, String> map = new HashMap<String, String>();
+//        user.setId(id);
+//        user.setName(name);
+//        user.setPwd(pwd);
+//        System.out.println(name + pwd);
+        Boolean res = userService.updateUser(user);
+        return retContent(200, map);
+    }
 }

@@ -1,13 +1,13 @@
 package com.web.model;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import org.hibernate.annotations.DynamicUpdate;
+
+import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
+@DynamicUpdate(true)
 public class Users {
     private int id;
     private String name;
@@ -16,6 +16,7 @@ public class Users {
     private Timestamp createdAt;
 
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     public int getId() {
         return id;

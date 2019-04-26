@@ -12,8 +12,6 @@
         <!-- 2.3 自动建表  -->
         <property name="hibernate.hbm2ddl.auto">create</property>
         <mapping class="com.web.model.Users"/>
-        <mapping resource="com/web/model/Users.hbm.xml"/>
-        <mapping resource="com/web/model/Menus.hbm.xml"/>
         <mapping class="com.web.model.Menus"/>
 
         <!-- DB schema will be updated if needed -->
